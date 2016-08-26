@@ -1,0 +1,97 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<div id="menu" ng-include="'views/common/menu.html'"></div>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">TaskList</h1>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+
+		<div class="col-lg-3">
+			<div class="dataTables_length" id="dataTables-example_length">
+				<label>Show  <select ng-init="page_row=dataTables.availableOptions[0]" ng-model="page_row"
+				ng-change="changePageRow()" 
+				ng-options="option.page_row for option in dataTables.availableOptions">
+					<!-- ng-model="data.selectedOption"> -->
+					</select> entries 
+				</label>
+			</div>
+		</div>
+		<div class="col-lg-6"></div>
+
+
+
+		<div class="col-lg-3">
+			<div id="dataTables-example_filter" class="dataTables_filter">
+				<label>Search:<input type="search"
+					class="form-control input-sm" placeholder=""
+					aria-controls="dataTables-example"></label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<table cellpadding="1" cellspacing="1"
+					class="table table-condensed table-striped 
+					table-bordered table-hover"
+					id="dataTables-example">
+					<thead>
+						<tr>
+							<th>Task_ID</th>
+							<th>Task_NAME</th>
+							<th>TYPE</th>
+							<th>Issue</th>
+							<th>Assignee</th>
+							<th>Create_date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="hover effect5" data-ng-click="taskInfoOk($index)"
+							ng-repeat="list in taskList">
+							<!-- <tr class="hover effect5" ui-sref="admin/task/taskInfo" ng-repeat="list in taskList"> -->
+							<td>[[list.TASK_ID]]</td>
+							<td>[[list.TASK_NAME]]</td>
+							<td>[[list.TASK_TYPE]]</td>
+							<td>[[list.ISSUE]]</td>
+							<td>[[list.NAME]]</td>
+							<td>[[list.CREATE_DATE | date:'yyyy-MM-dd HH:mm:ss']]</td>
+							<!-- 								<td><button data-ng-click="userDeleteOk($index)">삭제</button></td> -->
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- /.col-lg-12 -->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="dataTables_info" id="dataTables-example_info"
+						role="status" aria-live="polite">
+<!-- 						Showing [[currentPageNo]] to [[page_row.page_row]] of [[numPages]] entries -->
+						</div>
+				</div>
+				<div class="col-sm-6">
+					<pagination total-items="totalItems" ng-model="currentPageNo" ng-change="changePage()"
+						max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"
+						items-per-page="itemsPerPage"></pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+
+<!-- Right sidebar -->
+<!-- <div id="right-sidebar" ng-include="'views/common/right_sidebar.html'" class="sidebar-open" ng-show="rightSidebar"></div>-->
+
+<!-- Footer -->
+<!-- <footer class="footer" ng-include="'views/common/footer.html'"></footer> -->

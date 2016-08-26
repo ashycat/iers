@@ -1,0 +1,56 @@
+[
+ {
+   name: '대쉬보드',
+   url: '/dashboard',
+   path: 'admin/dashboard',
+   roles: ['admin'],
+   visible:true,
+   desc : 'admin'
+ },
+ {
+   name: '샘플',
+   path: 'admin/sample',
+   visible:true,
+   sub: [
+     {
+     name: '샘플입니다.',
+     url: '/admin/sample/sample',
+     path: 'admin/sample/sample',
+     visible:true,
+     deps: [
+            'controllers/admin/sample/sampleController'
+           ],
+     desc : '관리자'
+     }
+   ],
+   desc : 'admin'
+ },
+ {
+   name: 'Task',
+   path: 'admin/task',
+   visible:true,
+   sub: [
+     {
+     name: 'TaskList',
+     url: '/admin/task/task',
+     path: 'admin/task/task',
+     visible:true,
+     deps: [
+            'controllers/admin/task/taskController'
+           ],
+     desc : '관리자',
+     },
+     {
+     name: 'TaskInfo',
+     url: '/admin/task/taskInfo',
+     path: 'admin/task/taskInfo',
+     visible:false,
+     deps: [
+            'controllers/admin/task/taskInfoController'
+           ],
+     desc : '관리자',
+     }
+   ],
+   desc : 'admin'
+ },
+]

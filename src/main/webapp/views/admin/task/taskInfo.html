@@ -1,0 +1,183 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<div id="menu" ng-include="'views/common/menu.html'"></div>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">TaskInfo</h1>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-info">
+					<div class="panel-heading">Task Information	</div>
+					<!-- .panel-heading -->
+					<div class="panel-body">
+						<div class="panel-group">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">Details</h4>
+								</div>
+								<div id="collapseOne">
+									<div class="panel-body">
+										<div class="col-lg-6">
+											<div class="row">
+												<div class="col-lg-3">
+													<label>TaskID</label>
+												</div>
+												<div class="col-lg-9">
+													<input class="form-control" id="disabledInput" type="text"
+														data-ng-model=task.taskId disabled>
+												</div>
+											</div>
+											<!-- /.row -->
+											<div class="row">
+												<div class="col-lg-3">
+													<label>TaskName</label>
+												</div>
+												<div class="col-lg-9">
+													<input class="form-control" id="disabledInput" type="text"
+														data-ng-model=task.taskName disabled>
+												</div>
+											</div>
+											<!-- /.row -->
+											<div class="row">
+												<div class="col-lg-3">
+													<label>Issue</label>
+												</div>
+												<div class="col-lg-9">
+													<input class="form-control" id="disabledInput" type="text"
+														data-ng-model=task.issue disabled>
+												</div>
+											</div>
+											<!-- /.row -->
+											<div class="row">
+												<div class="col-lg-3">
+													<label>Assignee</label>
+												</div>
+												<div class="col-lg-7" style="padding-right: 0px;">
+													<input class="form-control" id="disabledInput" type="text"
+														data-ng-model=task.assignee disabled/>
+												</div>
+												<div class="col-lg-2"  style="padding-left: 0px;">
+													<button type="button" class="btn btn-default"
+													data-ng-click="changeAssignee()"style="padding-right: 17px; padding-left: 16px;">변경</button>
+												</div>
+											</div>
+											<!-- /.row -->
+											<div class="row">
+												<div class="col-lg-3">
+													<label>Department</label>
+												</div>
+												<div class="col-lg-9">
+													<input class="form-control" id="disabledInput" type="text"
+														data-ng-model=task.group disabled>
+												</div>
+											</div>
+											<!-- /.row -->
+										</div>
+										<!-- /.col-lg-6 -->
+										<div class="col-lg-6">
+											<div class="row">
+												<div class="col-lg-3">
+													<label>TaskType</label>
+												</div>
+												<div class="col-lg-9">
+													<input class="form-control" id="disabledInput" type="text"
+														data-ng-model=task.taskType disabled>
+												</div>
+											</div>
+											<!-- /.row -->
+											<div class="row">
+												<div class="col-lg-3">
+													<label>Status</label>
+												</div>
+												<div class="col-lg-9">
+													<select class="form-control"
+														data-ng-model=statusList.selected
+														ng-options="o as o for o in statusList.options" >
+													</select>
+												</div>
+											</div>
+
+											<!-- /.row -->
+											<div class="row">
+												<div class="col-lg-3">
+													<label>Create_Date</label>
+												</div>
+												<div class="col-lg-9">
+													<input class="form-control" id="disabledInput" type="text"
+														data-ng-model=task.create_date disabled>
+												</div>
+											</div>
+											<!-- /.row -->
+											<div class="row">
+												<div class="col-lg-3">
+													<label>Start_Date</label>
+												</div>
+												<div class="col-lg-9">
+													<input class="form-control" id="disabledInput" type="text"
+														data-ng-model=task.start_date disabled>
+												</div>
+											</div>
+											<!-- /.row -->
+											<div class="row">
+												<div class="col-lg-3">
+													<label>End_Date</label>
+												</div>
+												<div class="col-lg-9">
+													<input class="form-control" id="disabledInput" type="text"
+														data-ng-model=task.end_date disabled>
+												</div>
+											</div>
+											<!-- /.row -->
+											
+											<button type="button" class="btn btn-default"
+													data-ng-click="updateTask()"style="padding-right: 17px; padding-left: 16px;float:right;">확인</button>
+											
+										</div>
+										<!-- /.col-lg-6 -->
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">Description</h4>
+								</div>
+								<div id="collapseTwo">
+									<div class="panel-body">[[task.description]]</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">Comment</h4>
+								</div>
+								<div id="collapseThree">
+									<div class="panel-body">[[task.comment]]</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- .panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+
+<!-- Right sidebar -->
+<!-- <div id="right-sidebar" ng-include="'views/common/right_sidebar.html'" class="sidebar-open" ng-show="rightSidebar"></div>-->
+
+<!-- Footer -->
+<!-- <footer class="footer" ng-include="'views/common/footer.html'"></footer> -->

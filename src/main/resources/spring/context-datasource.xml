@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- oracle -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+
+
+	<bean id="dbDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1522/orcl" />
+		<property name="username" value="system" />
+		<property name="password" value="oracle" />
+	</bean>
+
+	<bean id="dataSource1" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dbDataSource" />
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL         :  " />
+			</bean>
+		</property>
+	</bean>
+<!-- 	
+	<bean id="dbDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName" value="JDBC/oracleDB1"/>
+	</bean>
+-->
+	
+	
+</beans>
+
+
+<!-- oracle JNDI -->
+<!-- InputStream in = Resources.getResourceAsStream("myconfig.xml"); SqlSessionFactory 
+	tomcatSessionFactory = new SqlSessionFactoryBuilder().build(in, "tomcat"); 
+	SqlSessionFactory websphereSessionFactory = new SqlSessionFactoryBuilder().build(in, 
+	"websphere"); <environments default="tomcat"> <environment id="tomcat"> <transactionManager 
+	type="JDBC"/> <dataSource type="JNDI"> <property name="data_source" value="java:comp/env/jdbc/myJndiName"/> 
+	</dataSource> </environment> <environment id="websphere"> <transactionManager 
+	type="JDBC"/> <dataSource type="JNDI"> <property name="data_source" value="java:jdbc/myJndiName"/> 
+	</dataSource> </environment> </environments> -->
+
+
+<!-- mysql -->
+<!-- <?xml version="1.0" encoding="UTF-8"?> <beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/jdbc 
+	http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd"> <bean id="dataSource" 
+	class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> <property 
+	name="driverClassName" value="com.mysql.jdbc.Driver"/> <property name="url" 
+	value="jdbc:mysql://주소/스키마"/> <property name="username" value="아이디"/> <property 
+	name="password" value="비밀번호"/> </bean> </beans> -->
