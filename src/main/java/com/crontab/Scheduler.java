@@ -19,10 +19,8 @@ public class Scheduler {
 	/**
 	 * 1. 오후 05:50:00에 호출이 되는 스케쥴러 
 	 */
-	@Scheduled(cron = "0 45 15 * * *")
+	@Scheduled(cron = "0 58 17 * * *")
 	public void cronTest1(){
-		
-		
 		
 		
 		Map<String, Object> commandMap = new HashMap<String, Object>();
@@ -34,7 +32,7 @@ public class Scheduler {
 	/**
 	 * 2. 오후 05:51:00에 호출이 되는 스케쥴러 
 	 */
-	@Scheduled(cron = "0 * * * * *")
+	@Scheduled(cron = "0 22 10 * * *")
 	public void cronTest2(){
 		System.out.println("1분마다 돕니다. ");
 	}

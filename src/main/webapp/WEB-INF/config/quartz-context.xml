@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/batch     http://www.springframework.org/schema/batch/spring-batch.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+ 
+    <bean id="TestTask" class="com.quartz.TestTask"/>
+    <bean id="TestTask1" class="com.quartz.TestTask1"/>
+ 
+    <bean name="TestJob" class="org.springframework.scheduling.quartz.JobDetailBean"
+          p:jobClass="com.quartz.TestJob">
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="TestTask" value-ref="TestTask"/>
+            </map>
+        </property>
+    </bean>
+    <bean name="TestJob1" class="org.springframework.scheduling.quartz.JobDetailBean"
+          p:jobClass="com.quartz.TestJob1">
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="TestTask1" value-ref="TestTask1"/>
+            </map>
+        </property>
+    </bean>
+ 
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"
+          p:jobDetail-ref="TestJob"
+          p:startDelay="1000"
+          p:cronExpression="0/10 * * * * ?"/>
+
+    <bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerBean"
+          p:jobDetail-ref="TestJob1"
+          p:startDelay="1000"
+          p:cronExpression="0/5 * * * * ?"/>
+ 
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+                <ref bean="cronTrigger1"/>
+            </list>
+        </property>
+    </bean>
+ 
+</beans>

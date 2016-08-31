@@ -8,17 +8,17 @@
    desc : 'admin'
  },
  {
-   name: '샘플',
-   path: 'admin/sample',
+   name: '스케줄러',
+   path: 'admin/scheduler',
    visible:true,
    sub: [
      {
-     name: '샘플입니다.',
-     url: '/admin/sample/sample',
-     path: 'admin/sample/sample',
+     name: '스케줄러 정보',
+     url: '/admin/scheduler/scheduler',
+     path: 'admin/scheduler/scheduler',
      visible:true,
      deps: [
-            'controllers/admin/sample/sampleController'
+            'controllers/admin/scheduler/schedulerController'
            ],
      desc : '관리자'
      }

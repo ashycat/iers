@@ -166,6 +166,13 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.3</version>
 		</dependency>
+		
+		<!-- quartz -->
+		<dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>1.8.6</version>
+    </dependency>
 
 		<!-- AspectJ -->
 		<dependency>

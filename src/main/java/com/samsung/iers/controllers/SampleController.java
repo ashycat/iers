@@ -1,12 +1,15 @@
 package com.samsung.iers.controllers;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.quartz.CronTrigger;
+import org.quartz.JobDetail;
+import org.quartz.impl.StdScheduler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,27 +17,67 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.samsung.iers.common.utils.ResponseToJson;
 import com.samsung.iers.services.SampleService;
  
 @Controller
 public class SampleController {
     Logger log = Logger.getLogger(this.getClass());
-     
+    
+    @Autowired
+    private StdScheduler stdScheduler;
+    
+    @Autowired
+    private SchedulerFactoryBean schedulerFactoryBean;
+    
+    
+    
     @Resource(name="sampleService")
     private SampleService sampleService;
      
     @RequestMapping(value="/api/samples/get", method=RequestMethod.GET)
     @ResponseBody
     public ModelAndView openSampleBoardList(Map<String,Object> commandMap) throws Exception{
-        ModelAndView mv = new ModelAndView("/sample/boardList");
+    	
+    	
+    	System.out.println( stdScheduler.getTriggerNames(StdScheduler.DEFAULT_GROUP).length);
+    	System.out.println( stdScheduler.getTriggerNames(StdScheduler.DEFAULT_GROUP)[0]);
+    	
+    	CronTrigger cron = (CronTrigger) stdScheduler.getTrigger(
+				"cronTrigger", StdScheduler.DEFAULT_GROUP);
+		
+		System.out.println("trigger "+cron.getJobName() + " : "
+				+ cron.getCronExpression() + " : ");
+		
+		if (cron != null) {
+			cron.setCronExpression("0/20 * * * * ?");
+			JobDetail job = (JobDetail) stdScheduler.getJobDetail(
+					"TestJob", StdScheduler.DEFAULT_GROUP);
+		
+			if (job != null) {
+				System.out.println("job "+ job.getFullName()  +" : " + job.getDescription());
+			
+				stdScheduler.deleteJob("TestJob", StdScheduler.DEFAULT_GROUP);
+				stdScheduler.scheduleJob(job, cron);
+			}
+
+		}
+		
+		if(schedulerFactoryBean.isRunning()){
+			schedulerFactoryBean.stop();
+		}else {
+			schedulerFactoryBean.start();
+		}
+		
+//    	
+//    	
+    	ModelAndView mv = new ModelAndView("/sample/boardList");
          
-        List<Map<String,Object>> list = sampleService.selectBoardList(commandMap);
-        
-        
-        mv.addObject("code","200");
-        mv.addObject("contents", list);
-        mv.setViewName("jsonView");
+//        List<Map<String,Object>> list = sampleService.selectBoardList(commandMap);
+//        
+//        
+//        mv.addObject("code","200");
+//        mv.addObject("contents", list);
+//        mv.setViewName("jsonView");
         return mv;
     }
     
@@ -63,4 +106,12 @@ public class SampleController {
 //         
 //        return response.;
 //    }
+    
+    
+    public void setSchedulerFactoryBean(StdScheduler schedulerFactoryBean)
+			throws Exception {
+
+		this.stdScheduler = schedulerFactoryBean;
+	}
+    
 }
