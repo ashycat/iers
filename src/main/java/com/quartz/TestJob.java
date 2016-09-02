@@ -11,7 +11,12 @@ public class TestJob extends QuartzJobBean {
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException {
 		// TODO Auto-generated method stub
-		tj.print();
+		try {
+			tj.print();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	

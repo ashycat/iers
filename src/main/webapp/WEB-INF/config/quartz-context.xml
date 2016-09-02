@@ -13,9 +13,11 @@
  
     <bean id="TestTask" class="com.quartz.TestTask"/>
     <bean id="TestTask1" class="com.quartz.TestTask1"/>
+    <bean id="SpringContextUtil" class="com.samsung.iers.common.utils.SpringContextUtil"/>
  
     <bean name="TestJob" class="org.springframework.scheduling.quartz.JobDetailBean"
           p:jobClass="com.quartz.TestJob">
+        <property name="group" value="잡 그룹"/>  
         <property name="jobDataAsMap">
             <map>
                 <entry key="TestTask" value-ref="TestTask"/>
@@ -24,6 +26,7 @@
     </bean>
     <bean name="TestJob1" class="org.springframework.scheduling.quartz.JobDetailBean"
           p:jobClass="com.quartz.TestJob1">
+        <property name="group" value="잡 그룹"/>
         <property name="jobDataAsMap">
             <map>
                 <entry key="TestTask1" value-ref="TestTask1"/>
@@ -40,12 +43,31 @@
           p:jobDetail-ref="TestJob1"
           p:startDelay="1000"
           p:cronExpression="0/5 * * * * ?"/>
+
+    <bean id="cronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerBean"
+          p:jobDetail-ref="TestJob1"
+          p:startDelay="1000"
+          p:cronExpression="0/20 * * * * ?"/>
  
     <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
                 <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="schedulerFactoryBean1" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
                 <ref bean="cronTrigger1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="schedulerFactoryBean2" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger2"/>
             </list>
         </property>
     </bean>

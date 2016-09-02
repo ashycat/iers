@@ -1,11 +1,23 @@
 define(['app'], function(app){
   
-app.factory('api/sample/resources', function(WrappedRestApi, RestApi, $log) {
-    var lists = WrappedRestApi.all('samples');
+app.factory('api/scheduler/resources', function(WrappedRestApi, RestApi, $log) {
+    var lists = WrappedRestApi.all('schedulers');
     return {
-      // 유저 목록 조회 
+      // 스케줄러 목록 조회
       getLists : function(param, ok, fail) {
-        lists.one('get').get().then(function(data) {
+        lists.one('all').get(param).then(function(data) {
+          $log.debug('data', data);
+          ok(data);
+        }, function(response) {
+          $log.debug('response', response);
+          if (angular.isFunction(fail)) {
+            fail(response);
+          }
+        });
+      },
+      
+      changeStatus : function (param, ok, fail) {
+        lists.one(param.schedulerName+'').all('changeStatus').post(param).then(function(data) {
           $log.debug('data', data);
           ok(data);
         }, function(response) {

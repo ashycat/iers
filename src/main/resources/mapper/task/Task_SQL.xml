@@ -10,12 +10,12 @@
         select row_number() over (order by a.create_date) RNUM,
 	        a.task_id, a.task_name, b.department, a.task_type, a.issue,  c.name, a.status, a.start_date, 
 	        a.end_date, a.create_date, a.description, a.comment1
-				from tb_iersf00 a , 
+				from tem_d_adm.tb_iersf00 a , 
 						(select task_type, listagg(department,', ') within group (order by department) as department 
-							from TB_IERS_TASK_TYPES group by task_type) b, 
+							from tem_d_adm.TB_IERS_TASK_TYPES group by task_type) b, 
 						(select aa.task_type, listagg(aa.name,', ') within group (order by aa.name) as name
 							from(select a.task_type, b.name 
-										from tb_iers_types_assignee a , tb_iers_users b where a.code = b.code group by a.code, b.name,a.task_type) aa
+										from tem_d_adm.tb_iers_types_assignee a , tem_d_adm.tb_iers_users b where a.code = b.code group by a.code, b.name,a.task_type) aa
 						group by aa.task_type) c 
 				where a.task_type = b.task_type
 				and a.task_type = c.task_type
@@ -25,14 +25,14 @@
 
 	<select id="countTask" parameterType="hashmap" resultType="hashmap">
         <![CDATA[
-        	select count(*) as total_count from tb_iersf00
+        	select count(*) as total_count from tem_d_adm.tb_iersf00
         ]]>
 	</select>
 
 	<select id="selectDepartmentByTaskType" parameterType="hashmap"
 		resultType="hashmap">
         <![CDATA[
-       	select department from tb_iers_task_types where task_type = #{task_type}
+       	select department from tem_d_adm.tb_iers_task_types where task_type = #{task_type}
         ]]>
 	</select>
 	<select id="selectOneTask" parameterType="hashmap" resultType="hashmap">
@@ -40,12 +40,12 @@
        	 select row_number() over (order by a.create_date) RNUM,
 	        a.task_id, a.task_name, b.department, a.task_type, a.issue,  c.name, a.status, a.start_date, 
 	        a.end_date, a.create_date, a.description, a.comment1
-				from tb_iersf00 a , 
+				from tem_d_adm.tb_iersf00 a , 
 						(select task_type, listagg(department,', ') within group (order by department) as department 
-							from TB_IERS_TASK_TYPES group by task_type) b, 
+							from tem_d_adm.TB_IERS_TASK_TYPES group by task_type) b, 
 						(select aa.task_type, listagg(aa.name,', ') within group (order by aa.name) as name
 							from(select a.task_type, b.name 
-										from tb_iers_types_assignee a , tb_iers_users b where a.code = b.code group by a.code, b.name,a.task_type) aa
+										from tem_d_adm.tb_iers_types_assignee a , tem_d_adm.tb_iers_users b where a.code = b.code group by a.code, b.name,a.task_type) aa
 						group by aa.task_type) c 
 				where a.task_type = b.task_type
 				and a.task_type = c.task_type
@@ -55,14 +55,15 @@
 	</select>
 	<select id="selectAssigneeByTaskType" parameterType="hashmap" resultType="hashmap">
         <![CDATA[
-       	select distinct b.name||'('||b.code||')' as pk, b.code, b.name,b.department from TB_IERS_TYPES_assignee a, TB_IERS_USERS b 
+       	select distinct b.name||'('||b.code||')' as pk, b.code, b.name,b.department from tem_d_adm.TB_IERS_TYPES_assignee a, tem_d_adm.TB_IERS_USERS b 
        	where a.code = b.code and a.task_type = #{task_type}
         ]]>
 	</select>
 	<select id="selectDptMemberByTaskType" parameterType="hashmap" resultType="hashmap">
         <![CDATA[
-	       select distinct a.name||'('||a.code||')' as pk, a.code, a.name, a.department from tb_iers_users a,
-					(select  department from TB_IERS_TASK_TYPES
+	       select distinct a.name||'('||a.code||')' as pk, a.code, a.name, a.department 
+	       from tem_d_adm.tb_iers_users a,
+					(select  department from tem_d_adm.TB_IERS_TASK_TYPES
 					where  task_type =  #{task_type}) b
 				 where a.department = b.department
         ]]>
@@ -70,31 +71,31 @@
 
 	<update id="updateTaskStatus" parameterType="hashmap">
         <![CDATA[
-       	update tb_iersf00 set status=#{status} where task_id=#{task_id}
+       	update tem_d_adm.tb_iersf00 set status=#{status} where task_id=#{task_id}
         ]]>
 	</update>
 
 	<update id="updateTaskStartDate" parameterType="hashmap">
         <![CDATA[
-       	update tb_iersf00 set start_date=sysdate where task_id=#{task_id}
+       	update tem_d_adm.tb_iersf00 set start_date=sysdate where task_id=#{task_id}
         ]]>
 	</update>
 
 	<update id="updateTaskEndDate" parameterType="hashmap">
         <![CDATA[
-       	update tb_iersf00 set end_date=sysdate where task_id=#{task_id}
+       	update tem_d_adm.tb_iersf00 set end_date=sysdate where task_id=#{task_id}
         ]]>
 	</update>
 	
 	<delete id="deleteAssignee" parameterType="hashmap">
         <![CDATA[
-       	delete tb_iers_types_assignee where task_type=#{task_type}
+       	delete tem_d_adm.tb_iers_types_assignee where task_type=#{task_type}
         ]]>
 	</delete>
 	
 	<insert id="insertAssignee" parameterType="hashmap">
         <![CDATA[
-       	insert into tb_iers_types_assignee(task_type, code) values (#{task_type}, #{CODE})
+       	insert into tem_d_adm.tb_iers_types_assignee(task_type, code) values (#{task_type}, #{CODE})
         ]]>
 	</insert>
 </mapper>

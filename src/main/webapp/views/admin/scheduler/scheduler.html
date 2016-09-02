@@ -19,19 +19,24 @@
 						class="table table-condensed table-striped">
 						<thead>
 							<tr>
-								<th>IDX</th>
-								<th>HIT_CNT</th>
-								<th>CREA_DTM</th>
-								<th>TITLE</th>
+								<th>그룹</th>
+								<th>스케줄러</th>
+								<th>트리거</th>
+								<th>잡</th>
+								<th>크론정보</th>
+								<th>상태</th>
+								<th>조작</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="list in sampleList">
-								<td>[[list.IDX]]</td>
-								<td>[[list.HIT_CNT]]</td>
-								<td>[[list.CREA_DTM]]</td>
-								<td>[[list.TITLE]]</td>
-<!-- 								<td><button data-ng-click="userDeleteOk($index)">삭제</button></td> -->
+							<tr ng-repeat="list in schedulerList">
+								<td>[[list.groupName]]</td>
+								<td>[[list.schedulerName]]</td>
+								<td>[[list.triggerName]]</td>
+								<td>[[list.jobName]]</td>
+								<td>[[list.crontab]]</td>
+								<td>[[list.status]]</td>
+ 								<td><button data-ng-click="jobChangeStatus($index)">조작</button></td> 
 									
 							</tr>
 						</tbody>
