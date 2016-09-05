@@ -151,7 +151,11 @@
 									<h4 class="panel-title">Description</h4>
 								</div>
 								<div id="collapseTwo">
-									<div class="panel-body">[[task.description]]</div>
+	<!-- 								<div class="panel-body">[[task.description]]</div> -->
+									<div class="panel-body">
+										<div ng-bind-html = "description">
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="panel panel-default">

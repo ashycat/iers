@@ -66,7 +66,9 @@ console.log("app-init.js");
       'angular-ui-sortable' : '../bower_components/angular-ui-sortable/sortable.min',
       'angular-footable' : '../bower_components/angular-footable/dist/angular-footable.min',
       'ngRoute' : '../bower_components/angular-route/angular-route.min',
-      'checklist-model' : '../bower_components/checklist-model/checklist-model'
+      'checklist-model' : '../bower_components/checklist-model/checklist-model',
+      'angular-sanitize' : '../bower_components/angular-sanitize/angular-sanitize.min'
+        
     // 'sb-admin-2' : 'lib/sb-admin-2',
   };
 console.log('requirePaths', requirePaths);
@@ -83,7 +85,7 @@ console.log('requirePaths', requirePaths);
      'fcsa-number' : ['angular'],
 //      'angular-ui-bootstrap': ['bootstrap', 'angular'],
      'angular-ui-router': ['angular'],
-//     'angular-sanitize': ['angular'],
+     'angular-sanitize': ['angular'],
      'angular-ui-select': ['angular'],
      'restangular':['angular'],
 //     'angular-animate':['angular'],

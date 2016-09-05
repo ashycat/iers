@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/batch     http://www.springframework.org/schema/batch/spring-batch.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+ 
+    <bean id="Imsgad01Task" class="com.samsung.iers.jobs.job.im_grp.imsgad.Imsgad01Task"/>
+ 
+    <bean name="Imsgad01Job" class="org.springframework.scheduling.quartz.JobDetailBean"
+          p:jobClass="com.samsung.iers.jobs.job.im_grp.imsgad.Imsgad01Job">
+        <property name="group" value="IM"/>  
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="Imsgad01Task" value-ref="Imsgad01Task"/>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="Imsgad01cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"
+          p:jobDetail-ref="Imsgad01Job"
+          p:startDelay="1000"
+          p:cronExpression="0 53 * * * ?"/>
+
+     
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="Imsgad01cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+ 
+</beans>

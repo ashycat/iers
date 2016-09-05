@@ -43,7 +43,7 @@ define(['app', 'services/api/task/resources'], function(app){
               };
               
               $scope.statusList.selected = $scope.task.status;
-             
+              $scope.description = $scope.task.description;
             });
           };
           

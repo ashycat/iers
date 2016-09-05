@@ -11,13 +11,13 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
  
  
-    <bean id="TestTask" class="com.quartz.TestTask"/>
+    <!-- <bean id="TestTask" class="com.quartz.TestTask"/>
     <bean id="TestTask1" class="com.quartz.TestTask1"/>
     <bean id="SpringContextUtil" class="com.samsung.iers.common.utils.SpringContextUtil"/>
  
     <bean name="TestJob" class="org.springframework.scheduling.quartz.JobDetailBean"
           p:jobClass="com.quartz.TestJob">
-        <property name="group" value="잡 그룹"/>  
+        <property name="group" value="IM"/>  
         <property name="jobDataAsMap">
             <map>
                 <entry key="TestTask" value-ref="TestTask"/>
@@ -71,5 +71,6 @@
             </list>
         </property>
     </bean>
- 
-</beans>
+ -->
+
+ </beans>

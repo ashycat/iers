@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="job_im_000004D_1">
+	<select id="Job_im_000004D_1"  resultType="hashmap" parameterType="hashmap">
+        <![CDATA[
+            select name, code, sg_id, com_name, com_cd from tem_d_adm.tb_sgusf00 a 
+						where ep_num ='E11' 
+						and not exists (select 1 from tem_d_adm.tb_imusf00 where a.sg_id= sg_id and sg_id != 'null')
+						and com_cd not like 'E11%'
+						and status !='V'
+        ]]>
+	</select>
+	<insert id="insertJob_im_000004D_1toJobTable"  parameterType="hashmap">
+        <![CDATA[
+            insert into tem_d_adm.tb_job_im_000004D_1(name,code,sg_id, com_name, com_cd ) 
+            (select name, code, sg_id, com_name, com_cd from tem_d_adm.tb_sgusf00 a 
+						where ep_num ='E11' 
+						and not exists (select 1 from tem_d_adm.tb_imusf00 where a.sg_id= sg_id and sg_id != 'null')
+						and com_cd not like 'E11%'
+						and status !='V')
+        ]]>
+	</insert>
+</mapper>
