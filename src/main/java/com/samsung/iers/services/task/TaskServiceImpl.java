@@ -10,7 +10,9 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.samsung.iers.common.utils.ConvertList;
 import com.samsung.iers.dao.task.TaskDAO;
+import com.samsung.iers.jobs.dao.common.Job_commonDAO;
 
 
 @Service("taskService")
@@ -21,6 +23,9 @@ public class TaskServiceImpl implements TaskService {
 	@Resource(name="taskDAO")
 	private TaskDAO taskDAO;
 
+	@Resource(name="job_commonDAO")
+	private Job_commonDAO job_commonDAO;
+	
 	@Override
 	public Map<String,Object> selectAllTaskList(
 			Map<String, Object> commandMap) throws Exception {
@@ -37,8 +42,21 @@ public class TaskServiceImpl implements TaskService {
 	// 
 	@Override
 	public Map<String, Object> selectOneTask(
-			Map<String, Object> commandMap) throws Exception {
-		return taskDAO.selectOneTask(commandMap);
+			Map<String, Object> map) throws Exception {
+		
+		List<Map<String, Object>> desList = new ArrayList<Map<String, Object>>();
+		System.out.println(map.get("table_name"));
+		
+		desList = job_commonDAO.selectDescriptionRow(map);
+
+		ConvertList cl = new ConvertList();
+		String desRow = cl.toHtmlTable(desList);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = taskDAO.selectOneTask(map); 
+		resultMap.put("descriptionRow", desRow);
+		
+		return resultMap;
 	}
 	
 	@Override

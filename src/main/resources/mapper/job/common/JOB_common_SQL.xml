@@ -4,9 +4,15 @@
 <mapper namespace="job_common">
 	<insert id="insertJobtoTaskTable" parameterType="hashmap">
         <![CDATA[
-            insert into tem_d_adm.tb_iersf00 (task_id, task_name, task_type, issue, description) 
-            select '123' as task_id, job_name as task_name, job_type as task_type, issue, description  from TEM_D_ADM.TB_JOBS 
+            insert into tem_d_adm.tb_iersf00 (job_id, task_id, task_name, task_type, issue, description, table_name) 
+            select job_id, #{task_id} as task_id, job_name as task_name, job_type as task_type, issue, description, table_name  from TEM_D_ADM.TB_JOBS 
         ]]>
 	</insert>
+	
+	<select id="selectDescriptionRow" resultType="hashmap" parameterType="hashmap">
+        <![CDATA[
+            select * from TEM_D_ADM.${table_name} where task_id = #{task_id}
+        ]]>
+	</select>
 
 </mapper>

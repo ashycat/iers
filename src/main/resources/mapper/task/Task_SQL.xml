@@ -9,7 +9,7 @@
         <![CDATA[
         select row_number() over (order by a.create_date) RNUM,
 	        a.task_id, a.task_name, b.department, a.task_type, a.issue,  c.name, a.status, a.start_date, 
-	        a.end_date, a.create_date, a.description, a.comment1
+	        a.end_date, a.create_date, a.description, a.comment1, a.table_name
 				from tem_d_adm.tb_iersf00 a , 
 						(select task_type, listagg(department,', ') within group (order by department) as department 
 							from tem_d_adm.TB_IERS_TASK_TYPES group by task_type) b, 

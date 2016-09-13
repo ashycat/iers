@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.samsung.iers.services.task.TaskService;
 
-@Controller
+@Controller 
 public class TaskController {
 	Logger log = Logger.getLogger(this.getClass());
 	
@@ -32,6 +32,8 @@ public class TaskController {
     public ModelAndView openTaskAllList(@RequestParam Map<String,Object> commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("/task/taskList");
          
+        
+        
         System.out.println(commandMap.toString());
         
         Map<String,Object> resultMap = taskService.selectAllTaskList(commandMap);
@@ -44,16 +46,21 @@ public class TaskController {
     }
 
 	//select One Task List
-	@RequestMapping(value="/api/tasks/{task_id}", method=RequestMethod.GET)
+	@RequestMapping(value="/api/tasks/{task_id}/{table_name}", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView openTaskOneList(@PathVariable String task_id,
-			Map<String,Object> commandMap) throws Exception{
+			@PathVariable String table_name,
+			 Map<String,Object> commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView("/task/taskOne");
 		
-//		Map<String,Object> map = new HashMap<String, Object>();
-		commandMap.put("task_id", task_id);
+		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		
-		Map<String,Object> result =  taskService.selectOneTask(commandMap);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("task_id", task_id);
+		map.put("table_name", table_name);
+		
+		
+		Map<String,Object> result =  taskService.selectOneTask(map);
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		list.add(result);
 		

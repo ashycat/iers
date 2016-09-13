@@ -6,14 +6,14 @@
                         http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
 
-	<bean id="dbDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+ 	<!-- <bean id="dbDataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1522/orcl" />
 		<property name="username" value="temdour" />
 		<property name="password" value="123456" />
-	</bean>
-
+	</bean> -->
+ 
 	<bean id="dataSource1" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dbDataSource" />
 		<property name="logFormatter">
@@ -23,11 +23,11 @@
 			</bean>
 		</property>
 	</bean>
-<!-- 	
+ 	
 	<bean id="dbDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-    <property name="jndiName" value="JDBC/oracleDB1"/>
+    <property name="jndiName" value="JDBC/orcl"/>
 	</bean>
--->
+ 
 	
 	
 </beans>

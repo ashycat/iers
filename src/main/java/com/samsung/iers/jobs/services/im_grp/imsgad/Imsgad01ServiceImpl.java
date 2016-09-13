@@ -1,6 +1,7 @@
 package com.samsung.iers.jobs.services.im_grp.imsgad;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.samsung.iers.common.utils.TaskID;
 import com.samsung.iers.jobs.dao.common.Job_commonDAO;
 import com.samsung.iers.jobs.dao.im_grp.imsgad.Imsgad01DAO;
 
@@ -33,6 +35,9 @@ public class Imsgad01ServiceImpl implements Imsgad01Service {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 				list = imsgad01DAO.Job_im_000004D_1(map);
 		if(list.size() != 0) {
+			TaskID t = new TaskID("JOB_IM_000004D_1");
+			map = new HashMap<String, Object>();
+			map.put("task_id", t.CreateTaskID());
 			imsgad01DAO.insertJob_im_000004D_1toJobTable(map);
 			job_commonDAO.insertJobtoTaskTable(map);
 		}

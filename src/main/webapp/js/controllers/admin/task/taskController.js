@@ -84,6 +84,7 @@ define(['angular','app', 'services/api/task/resources'], function(angular, app){
 //            console.log('date',$scope.data.date.getTime());
             $cookies.put('taskId',$scope.taskList[row].TASK_ID);
             $cookies.put('taskType',$scope.taskList[row].TASK_TYPE);
+            $cookies.put('tableName',$scope.taskList[row].TABLE_NAME);
             $location.path('/admin/task/taskInfo');
           };
           

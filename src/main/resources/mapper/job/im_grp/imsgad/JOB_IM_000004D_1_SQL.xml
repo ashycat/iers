@@ -13,8 +13,8 @@
 	</select>
 	<insert id="insertJob_im_000004D_1toJobTable"  parameterType="hashmap">
         <![CDATA[
-            insert into tem_d_adm.tb_job_im_000004D_1(name,code,sg_id, com_name, com_cd ) 
-            (select name, code, sg_id, com_name, com_cd from tem_d_adm.tb_sgusf00 a 
+            insert into tem_d_adm.tb_job_im_000004D_1(task_id, name,code,sg_id, com_name, com_cd ) 
+            (select #{task_id} as task_id ,name, code, sg_id, com_name, com_cd from tem_d_adm.tb_sgusf00 a 
 						where ep_num ='E11' 
 						and not exists (select 1 from tem_d_adm.tb_imusf00 where a.sg_id= sg_id and sg_id != 'null')
 						and com_cd not like 'E11%'

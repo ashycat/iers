@@ -19,6 +19,7 @@ public class TaskDAO extends AbstractDAO {
 
 	public Map<String, Object> selectOneTask(Map<String, Object> map) {
 		// task.selectOneTaskList -> mapper
+		
 		return (Map<String, Object>)selectOne("task.selectOneTask", map);
 		
 	}

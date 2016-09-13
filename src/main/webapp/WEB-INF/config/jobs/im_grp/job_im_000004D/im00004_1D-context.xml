@@ -26,7 +26,7 @@
     <bean id="Imsgad01cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"
           p:jobDetail-ref="Imsgad01Job"
           p:startDelay="1000"
-          p:cronExpression="0 53 * * * ?"/>
+          p:cronExpression="0 20 * * * ?"/>
 
      
     <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

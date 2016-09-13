@@ -15,6 +15,14 @@ public class Job_commonDAO extends AbstractDAO {
 		 insert ("job_common.insertJobtoTaskTable", map);
     
 	}
+	public List<Map<String, Object>> selectDescriptionRow (Map<String, Object> map) {
+		// task.selectAllTaskList -> mapper
+		
+		System.out.println("job_commonDAO " + map.get("table_name"));
+		
+		return selectList("job_common.selectDescriptionRow", map);
+		
+	}
 
 	
 }

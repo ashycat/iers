@@ -17,7 +17,7 @@ app.factory('api/task/resources', function(WrappedRestApi, RestApi, $log) {
       },
       // 한개 태스크 정보 조회
       getOne : function(param, ok, fail) {
-        tasks.one(param.id+"").get(param).then(function(data) {
+        tasks.one(param.id+"").one(param.table_name+"").get().then(function(data) {
           $log.debug('data', data);
           ok(data);
         }, function(response) {

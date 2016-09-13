@@ -23,7 +23,8 @@ define(['app', 'services/api/task/resources'], function(app){
           $scope.getTaskInfo = function() {
             var param = {
                 id:$cookies.get("taskId"),
-                type:$cookies.get("taskType")
+                type:$cookies.get("taskType"),
+                table_name:$cookies.get("tableName")+""
             };
             $taskResources.getOne(param, function(result) {
               console.log('t',result.contents);
@@ -36,6 +37,7 @@ define(['app', 'services/api/task/resources'], function(app){
                 issue : result.contents[0].ISSUE,   
                 status : result.contents[0].STATUS,   
                 description : result.contents[0].DESCRIPTION,   
+                descriptionRow : result.contents[0].descriptionRow,   
                 comment : result.contents[0].COMMENT1,   
                 create_date : $filter('date')(result.contents[0].CREATE_DATE, 'yyyy-MM-dd HH:mm:ss'),   
                 start_date : $filter('date')(result.contents[0].START_DATE, 'yyyy-MM-dd HH:mm:ss'),  
@@ -43,7 +45,9 @@ define(['app', 'services/api/task/resources'], function(app){
               };
               
               $scope.statusList.selected = $scope.task.status;
-              $scope.description = $scope.task.description;
+              $scope.description = $scope.task.description + $scope.task.descriptionRow +"";
+              console.log("row", $scope.task.descriptionRow);
+                                    
             });
           };
           
