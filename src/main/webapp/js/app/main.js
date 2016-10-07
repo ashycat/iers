@@ -10,7 +10,8 @@
                'restangular',
                'lodash',
                'ng-grid',
-              //  'angular-animate',
+               'angular-animate',
+               'angular-aria',
                'angular-ui-router',
                'angular-ui-utils',
                'angular-bootstrap',
@@ -42,13 +43,14 @@
                'angular-ui-sortable',
                'angular-footable',
                'ngRoute',
-               'checklist-model'
+               'checklist-model',
+               'angular-material'
                ];
 
    var modules = [
                   'restangular',
                   'ngGrid',
-                  // 'ngAnimate',
+                  'ngAnimate',
                   'ui.utils',
                   'ui.bootstrap',
                   'ui.router',
@@ -75,7 +77,8 @@
                   'ui.sortable',              // AngularJS ui-sortable
                   'ui.footable',               // FooTable
                   'ngRoute',
-                  'checklist-model'
+                  'checklist-model',
+                  'ngMaterial'
                   ];
 
   // if (ie8 || ie9) {

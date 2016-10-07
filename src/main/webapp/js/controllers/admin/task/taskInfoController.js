@@ -12,6 +12,13 @@ define(['app', 'services/api/task/resources'], function(app){
         function ($scope,$taskResources, $modal, $cookies, $filter) {
           console.log('task Info Controller ');
           
+          
+          $scope.endDateOnSetTime = function() {
+            console.log($filter('date')($scope.data.date, 'yyyy-MM-dd'));
+            $scope.data.date = $filter('date')($scope.data.date, 'yyyy-MM-dd') + " 23:59:59";
+            
+          }
+          
           /*********************************************
            * 함수명 : getTaskInfo
            * 설명 : 선택된 Task의 상세정보를 가져온다
@@ -42,7 +49,10 @@ define(['app', 'services/api/task/resources'], function(app){
                 create_date : $filter('date')(result.contents[0].CREATE_DATE, 'yyyy-MM-dd HH:mm:ss'),   
                 start_date : $filter('date')(result.contents[0].START_DATE, 'yyyy-MM-dd HH:mm:ss'),  
                 end_date : $filter('date')(result.contents[0].END_DATE, 'yyyy-MM-dd HH:mm:ss'),   
+                expected_end_date : $filter('date')(result.contents[0].EXPECTED_END_DATE, 'yyyy-MM-dd HH:mm:ss'),   
               };
+              
+              setStatusList();
               
               $scope.statusList.selected = $scope.task.status;
               $scope.description = $scope.task.description + $scope.task.descriptionRow +"";
@@ -51,23 +61,46 @@ define(['app', 'services/api/task/resources'], function(app){
             });
           };
           
+          $scope.myDate = new Date();
+          
           //taskinfo view에 로드 
           $scope.getTaskInfo();
           
-          
-
-          $scope.statusList = {
-              options: [
-                'Ready',
-                'TODO',
-                'Assigned',
-                'InProgress',
-                'Resolve',
-                'Terminated'
-              ],
-//              selected: result.contents[0].STATUS
+          /********************************************
+           * Status 따른 리스트 변경 
+           * 
+           ********************************************/          
+          var setStatusList = function() {
+            if($scope.task.status === 'TODO') {
+              $scope.statusList = {
+                  options: [
+                    'TODO',
+                    'Assigned',
+                    'InProgress',
+                  ]
+              }
+            } else if ($scope.task.status === 'Assigned') {
+              $scope.statusList = {
+                  options: [
+                    'Assigned',
+                    'InProgress',
+                  ]
+              }
+            } else if ($scope.task.status === 'InProgress') {
+              $scope.statusList = {
+                  options: [
+                    'InProgress',
+                    'Terminated'
+                  ]
+              }
+            } else if ($scope.task.status === 'Terminated') {
+              $scope.statusList = {
+                  options: [
+                    'Terminated'
+                  ]
+              }
+            }
           };
-          
           
           
           /***********************************************

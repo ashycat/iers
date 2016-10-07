@@ -43,6 +43,7 @@
     <!-- build:css({.tmp,app}) styles/style.css -->
     <link rel="stylesheet" href="css/timeline.css" />
     <link rel="stylesheet" href="css/sb-admin-2.css" />
+    <link rel="stylesheet" href="css/common.css" />
     <!--endbuild -->
 
 </head>

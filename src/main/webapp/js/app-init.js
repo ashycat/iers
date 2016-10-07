@@ -1,3 +1,4 @@
+
 // <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 //
 // <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
@@ -23,7 +24,7 @@ console.log("app-init.js");
       'jquery-flot-curvedlines' : '../bower_components/flot.curvedlines/curvedLines',
       'jquery-flot-spline' : '../bower_components/jquery.flot.spline/index',
       'angular' : '../bower_components/angular/angular',
-//       'angular-animate' : '../bower_components/angular-animate/angular-animate.min',
+      'angular-animate' : '../bower_components/angular-animate/angular-animate.min',
       'angular-ui-router' : '../bower_components/angular-ui-router/release/angular-ui-router',
       'angular-bootstrap' : '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
       'angular-flot' : '../bower_components/angular-flot/angular-flot',
@@ -67,7 +68,10 @@ console.log("app-init.js");
       'angular-footable' : '../bower_components/angular-footable/dist/angular-footable.min',
       'ngRoute' : '../bower_components/angular-route/angular-route.min',
       'checklist-model' : '../bower_components/checklist-model/checklist-model',
-      'angular-sanitize' : '../bower_components/angular-sanitize/angular-sanitize.min'
+      'angular-sanitize' : '../bower_components/angular-sanitize/angular-sanitize.min',
+      
+      'angular-material' : '../bower_components/angular-material/angular-material.min',
+      'angular-aria' : '../bower_components/angular-aria/angular-aria.min'
         
     // 'sb-admin-2' : 'lib/sb-admin-2',
   };
@@ -88,7 +92,7 @@ console.log('requirePaths', requirePaths);
      'angular-sanitize': ['angular'],
      'angular-ui-select': ['angular'],
      'restangular':['angular'],
-//     'angular-animate':['angular'],
+     'angular-animate':['angular'],
      'angular-ui-map':['angular'],
      'angular-flot':['angular'],
      'angular-peity':['angular'],
@@ -111,7 +115,9 @@ console.log('requirePaths', requirePaths);
      'angular-ui-sortable' : ['angular'],
      'angular-footable' : ['angular'],
      'ngRoute' : ['angular'],
-     'checklist-model' : ['angular']
+     'checklist-model' : ['angular'],
+     'angular-material' : ['angular', 'angular-animate', 'angular-aria'],
+     'angular-aria' : ['angular']
   };
 console.log('requireShims', requireShims);
   require.config({
