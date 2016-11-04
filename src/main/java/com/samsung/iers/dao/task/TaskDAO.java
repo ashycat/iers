@@ -32,6 +32,11 @@ public class TaskDAO extends AbstractDAO {
 		update("task.updateTaskStartDate", map);
 		
 	}
+	
+	public void updateTaskExpectedEndDate(Map<String, Object> map) {
+		update("task.updateTaskExpectedEndDate", map);
+		
+	}
 
 	public void updateTaskEndDate(Map<String, Object> map) {
 		update("task.updateTaskEndDate", map);

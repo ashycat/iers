@@ -101,7 +101,7 @@
 												</div>
 												<div class="col-lg-9">
 													<select class="form-control"
-														data-ng-model=statusList.selected
+														data-ng-model=selectedStatus
 														ng-change="statusChange()"
 														ng-options="o as o for o in statusList.options">
 													</select>
@@ -152,13 +152,13 @@
 															
 															<div class="input-append">
 																 <input type="text" class="form-control"
-																	data-ng-model=data.date  >
+																	data-ng-model=expected_end_date  >
 																	<span class="add-on"><i	class="icon-calendar"></i></span> 
 															</div>
 														</a>
 														<ul class="dropdown-menu" role="menu"
 															aria-labelledby="dLabel">
-															 <datetimepicker data-ng-model= data.date 
+															 <datetimepicker data-ng-model= expected_end_date 
 															 	data-on-set-time="endDateOnSetTime()"
 																data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select', minView: 'day' }"></datetimepicker>
 														</ul>

@@ -44,23 +44,23 @@
 					id="dataTables-example">
 					<thead>
 						<tr>
-							<th>태스크 그룹</th>
-							<th>태스크 명</th>
-							<th>할일</th>
-							<th>담당자</th>
-							<th>상태</th>
-							<th>생성시간</th>
+							<th>Task_ID</th>
+							<th>Task_NAME</th>
+							<th>TYPE</th>
+							<th>Issue</th>
+							<th>Assignee</th>
+							<th>Create_date</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="hover effect5" data-ng-click="taskInfoOk($index)"
 							ng-repeat="list in taskList">
 							<!-- <tr class="hover effect5" ui-sref="admin/task/taskInfo" ng-repeat="list in taskList"> -->
-							<td>[[list.TASK_TYPE]]</td>
+							<td>[[list.TASK_ID]]</td>
 							<td>[[list.TASK_NAME]]</td>
+							<td>[[list.TASK_TYPE]]</td>
 							<td>[[list.ISSUE]]</td>
 							<td>[[list.NAME]]</td>
-							<td>[[list.STATUS]]</td>
 							<td>[[list.CREATE_DATE | date:'yyyy-MM-dd HH:mm:ss']]</td>
 							<!-- 								<td><button data-ng-click="userDeleteOk($index)">삭제</button></td> -->
 

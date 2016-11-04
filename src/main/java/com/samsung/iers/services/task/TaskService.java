@@ -13,10 +13,10 @@ public interface TaskService {
 	Map<String, Object> selectOneTask(Map<String, Object> commandMap) throws Exception;
 
 	@Transactional
-	void updateTaskStatusStart(Map<String, Object> commandMap) throws Exception;
+	void updateTaskStatus(Map<String, Object> commandMap) throws Exception;
 
-	@Transactional
-	void updateTaskStatusEnd(Map<String, Object> commandMap) throws Exception;
+//	@Transactional
+//	void updateTaskStatusEnd(Map<String, Object> commandMap) throws Exception;
 	
 	@Transactional
 	List<Map<String, Object>> selectAssigneeByTaskType(Map<String, Object> map);

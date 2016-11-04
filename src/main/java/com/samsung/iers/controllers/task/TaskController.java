@@ -21,6 +21,7 @@ import com.samsung.iers.services.task.TaskService;
 
 @Controller 
 public class TaskController {
+
 	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name = "taskService")
@@ -34,10 +35,10 @@ public class TaskController {
          
         
         
-        System.out.println(commandMap.toString());
+        log.info("info " + log.isDebugEnabled());
+        log.debug("debug " + commandMap.toString());
         
         Map<String,Object> resultMap = taskService.selectAllTaskList(commandMap);
-        System.out.println(resultMap.toString());
         mv.addObject("code","200");
         mv.addObject("total_count",resultMap.get("TOTAL_COUNT"));
         mv.addObject("contents", resultMap.get("result"));
@@ -75,20 +76,19 @@ public class TaskController {
 	@ResponseBody
 	public ModelAndView updateTaskStatus(@PathVariable String task_id,
 			@PathVariable String status,	
-			Map<String,Object> commandMap) throws Exception{
+			@RequestBody Map<String,Object> reqbody) throws Exception{
 		ModelAndView mv = new ModelAndView("/task/updateTaskStatus");
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("task_id", task_id);
 		map.put("status", status);
+		map.put("expected_end_date", reqbody.get("expected_end_date"));
 		System.out.println("taskID, status " + task_id + " : " + status);
 
-		if(status.equals("Assigned")) {
 		
-			taskService.updateTaskStatusStart(map);
-		} else if (status.equals("Terminated")) {
-			taskService.updateTaskStatusEnd(map);
-		}
+		
+		taskService.updateTaskStatus(map);
+	
 		
 		mv.addObject("code","200");
 //		mv.addObject("contents", list);

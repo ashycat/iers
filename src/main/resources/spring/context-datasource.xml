@@ -13,8 +13,12 @@
 		<property name="username" value="temdour" />
 		<property name="password" value="123456" />
 	</bean> 
+ 	
+ <!--  <bean id="dbDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName" value="JDBC/orcl"/>
+	</bean>  -->
  
-	<bean id="dataSource1" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+	<bean id="dataSource1" class="net.sf.log4jdbc.Log4jdbcProxyDataSource" >
 		<constructor-arg ref="dbDataSource" />
 		<property name="logFormatter">
 			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
@@ -23,10 +27,6 @@
 			</bean>
 		</property>
 	</bean>
- 	
-	<!-- <bean id="dbDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-    <property name="jndiName" value="JDBC/orcl"/>
-	</bean> -->
  
 	
 	

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tasklog">
+
+	<select id="selectAllTaskList" parameterType="hashmap"
+		resultType="hashmap">
+		<include refid="common.pagingPre" />
+        <![CDATA[
+        select row_number() over (order by a.create_date) RNUM,
+	        a.task_id, a.task_name, b.department, a.task_type, a.issue,  c.name, a.status, a.start_date, 
+	        a.end_date, a.create_date, a.description, a.comment1, a.table_name, a.expected_end_date
+				from tem_d_adm.tb_iersf00 a , 
+						(select task_type, listagg(department,', ') within group (order by department) as department 
+							from tem_d_adm.TB_IERS_TASK_TYPES group by task_type) b, 
+						(select aa.task_type, listagg(aa.name,', ') within group (order by aa.name) as name
+							from(select a.task_type, b.name 
+										from tem_d_adm.tb_iers_types_assignee a , tem_d_adm.tb_iers_users b where a.code = b.code group by a.code, b.name,a.task_type) aa
+						group by aa.task_type) c 
+				where a.task_type = b.task_type
+				and a.task_type = c.task_type
+				and status ='Terminated'
+        ]]>
+		<include refid="common.pagingPost" />
+	</select>
+
+	<select id="countTask" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+        	select count(*) as total_count from tem_d_adm.tb_iersf00 where status ='Terminated'
+        ]]>
+	</select>
+</mapper>

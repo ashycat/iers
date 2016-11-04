@@ -43,7 +43,6 @@
                'angular-ui-sortable',
                'angular-footable',
                'ngRoute',
-               'checklist-model',
                'angular-material'
                ];
 
@@ -77,7 +76,6 @@
                   'ui.sortable',              // AngularJS ui-sortable
                   'ui.footable',               // FooTable
                   'ngRoute',
-                  'checklist-model',
                   'ngMaterial'
                   ];
 

@@ -2,6 +2,7 @@ package com.samsung.iers.services.task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class TaskServiceImpl implements TaskService {
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		resultMap.putAll(taskDAO.countTask(commandMap));
 		resultMap.putAll(taskDAO.selectAllTaskList(commandMap));
-
+		System.out.println("RESULT MAP : "+resultMap);
 		return resultMap;
 	}
 
@@ -44,11 +45,13 @@ public class TaskServiceImpl implements TaskService {
 	public Map<String, Object> selectOneTask(
 			Map<String, Object> map) throws Exception {
 		
-		List<Map<String, Object>> desList = new ArrayList<Map<String, Object>>();
+		List<LinkedHashMap<String, Object>> desList = new ArrayList<LinkedHashMap<String, Object>>();
 		System.out.println(map.get("table_name"));
 		
 		desList = job_commonDAO.selectDescriptionRow(map);
 
+		
+		
 		ConvertList cl = new ConvertList();
 		String desRow = cl.toHtmlTable(desList);
 
@@ -60,17 +63,22 @@ public class TaskServiceImpl implements TaskService {
 	}
 	
 	@Override
-	public void updateTaskStatusStart(Map<String, Object> commandMap) {
+	public void updateTaskStatus(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		taskDAO.updateTaskStatus(commandMap);
-		taskDAO.updateTaskStartDate(commandMap);
-	}
+		
+		if(map.get("status").equals("Assigned")) {
+			taskDAO.updateTaskStatus(map);
+			
+		}else if(map.get("status").equals("InProgress")) {
+			taskDAO.updateTaskStatus(map);
+			taskDAO.updateTaskStartDate(map);
+			taskDAO.updateTaskExpectedEndDate(map);
 
-	@Override
-	public void updateTaskStatusEnd(Map<String, Object> commandMap) {
-		// TODO Auto-generated method stub
-		taskDAO.updateTaskStatus(commandMap);
-		taskDAO.updateTaskEndDate(commandMap);
+		}else if(map.get("status").equals("Terminated")) {
+			taskDAO.updateTaskStatus(map);
+			taskDAO.updateTaskEndDate(map);
+		}
+		
 	}
 
 	@Override

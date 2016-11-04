@@ -1,12 +1,12 @@
 package com.samsung.iers.common.utils;
 
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class ConvertList {
 
-	public String toHtmlTable(List<Map<String, Object>> list){
+	public String toHtmlTable(List<LinkedHashMap<String, Object>> list){
 		
 		if(list.size() == 0){
 			return null;
@@ -33,7 +33,7 @@ public class ConvertList {
 		}
 		
 		htmlTable = htmlTable+"</table>";
-		System.out.println(htmlTable);
+		System.out.println("1232132321"+htmlTable);
 		return htmlTable;
 	}
 }

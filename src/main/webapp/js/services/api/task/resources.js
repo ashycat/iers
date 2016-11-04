@@ -28,9 +28,12 @@ app.factory('api/task/resources', function(WrappedRestApi, RestApi, $log) {
         });
       },
       // 태스크 Status 수정
-      updateStatus : function(param, ok, fail) {
-        tasks.one(param.id+"").one("status", param.status).put().then(function(data) {
-          $log.debug('data', data);
+      updateTask : function(param, ok, fail) {
+        
+        console.log('param1', param);
+        
+        tasks.one(param.id+"").one("status", param.status).customPUT(param).then(function(data) {
+          $log.debug('updatedata', data);
           ok(data);
         }, function(response) {
           $log.debug('response', response);

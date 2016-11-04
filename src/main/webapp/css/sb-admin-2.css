@@ -14,11 +14,11 @@ body {
 
 #page-wrapper {
     padding: 0 15px;
-    min-height: 568px;
+    min-height: 1000px;
     background-color: #fff;
 }
 
-@media(min-width:768px) {
+@media(min-width:1000px) {
     #page-wrapper {
         position: inherit;
         margin: 0 0 0 250px;

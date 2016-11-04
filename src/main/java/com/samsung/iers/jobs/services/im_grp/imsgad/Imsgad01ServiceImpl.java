@@ -35,6 +35,7 @@ public class Imsgad01ServiceImpl implements Imsgad01Service {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 				list = imsgad01DAO.Job_im_000004D_1(map);
 		if(list.size() != 0) {
+			
 			TaskID t = new TaskID("JOB_IM_000004D_1");
 			map = new HashMap<String, Object>();
 			map.put("task_id", t.CreateTaskID());

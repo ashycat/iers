@@ -14,9 +14,10 @@ define(['app', 'services/api/task/resources'], function(app){
           
           
           $scope.endDateOnSetTime = function() {
-            console.log($filter('date')($scope.data.date, 'yyyy-MM-dd'));
-            $scope.data.date = $filter('date')($scope.data.date, 'yyyy-MM-dd') + " 23:59:59";
-            
+//            console.log($filter('date')($scope.data.date, 'yyyy-MM-dd'));
+//            $scope.data.date = $filter('date')($scope.data.date, 'yyyy-MM-dd') + " 23:59:59";
+            $scope.expected_end_date = $filter('date')($scope.expected_end_date, 'yyyy-MM-dd') + " 23:59:59";
+              
           }
           
           /*********************************************
@@ -52,9 +53,10 @@ define(['app', 'services/api/task/resources'], function(app){
                 expected_end_date : $filter('date')(result.contents[0].EXPECTED_END_DATE, 'yyyy-MM-dd HH:mm:ss'),   
               };
               
-              setStatusList();
+              setStatusList($scope.task.status);
               
-              $scope.statusList.selected = $scope.task.status;
+              $scope.expected_end_date = $scope.task.expected_end_date;
+              $scope.selectedStatus = $scope.task.status;
               $scope.description = $scope.task.description + $scope.task.descriptionRow +"";
               console.log("row", $scope.task.descriptionRow);
                                     
@@ -70,8 +72,9 @@ define(['app', 'services/api/task/resources'], function(app){
            * Status 따른 리스트 변경 
            * 
            ********************************************/          
-          var setStatusList = function() {
-            if($scope.task.status === 'TODO') {
+          var setStatusList = function(selectedStatus) {
+            console.log("sdlkjf");
+            if(selectedStatus === 'TODO') {
               $scope.statusList = {
                   options: [
                     'TODO',
@@ -79,21 +82,21 @@ define(['app', 'services/api/task/resources'], function(app){
                     'InProgress',
                   ]
               }
-            } else if ($scope.task.status === 'Assigned') {
+            } else if (selectedStatus === 'Assigned') {
               $scope.statusList = {
                   options: [
                     'Assigned',
                     'InProgress',
                   ]
               }
-            } else if ($scope.task.status === 'InProgress') {
+            } else if (selectedStatus === 'InProgress') {
               $scope.statusList = {
                   options: [
                     'InProgress',
                     'Terminated'
                   ]
               }
-            } else if ($scope.task.status === 'Terminated') {
+            } else if (selectedStatus === 'Terminated') {
               $scope.statusList = {
                   options: [
                     'Terminated'
@@ -102,6 +105,19 @@ define(['app', 'services/api/task/resources'], function(app){
             }
           };
           
+          
+          /*****************************************************
+           * statusChange() 
+           *****************************************************/
+          $scope.statusChange = function() {
+            //statusList.selecteda
+//            $scope.selectedStatus;;
+            
+            setStatusList($scope.selectedStatus);
+            console.log("상태가 변경되었습니다 ", $scope.selectedStatus);
+            
+            
+          };
           
           /***********************************************
            * 함수명 : updateTask
@@ -114,6 +130,18 @@ define(['app', 'services/api/task/resources'], function(app){
           // 
           $scope.updateTask = function() {
             console.log('updateTask req param', $scope.task.taskName);
+            console.log('updateTask expected_end_date', $scope.expected_end_date);
+            
+            var param = {
+                id: $cookies.get("taskId"),
+                status: $scope.selectedStatus,
+                expected_end_date: $scope.expected_end_date
+            };
+            $taskResources.updateTask(param, function(result){
+              $scope.getTaskInfo();
+              console.log("updateTask end");
+              
+            });
             
           };
           

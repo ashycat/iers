@@ -19,6 +19,7 @@
 						group by aa.task_type) c 
 				where a.task_type = b.task_type
 				and a.task_type = c.task_type
+				and status !='Terminated'
         ]]>
 		<include refid="common.pagingPost" />
 	</select>
@@ -50,7 +51,7 @@
 				where a.task_type = b.task_type
 				and a.task_type = c.task_type
 				and a.task_id=#{task_id}
-				order by create_date
+				order by create_date desc
         ]]>
 	</select>
 	<select id="selectAssigneeByTaskType" parameterType="hashmap" resultType="hashmap">
@@ -78,6 +79,12 @@
 	<update id="updateTaskStartDate" parameterType="hashmap">
         <![CDATA[
        	update tem_d_adm.tb_iersf00 set start_date=sysdate where task_id=#{task_id}
+        ]]>
+	</update>
+
+	<update id="updateTaskExpectedEndDate" parameterType="hashmap">
+        <![CDATA[
+       	update tem_d_adm.tb_iersf00 set expected_end_date=to_date(#{expected_end_date},'YYYY-MM-DD HH24:MI:SS') where task_id=#{task_id}
         ]]>
 	</update>
 

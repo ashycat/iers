@@ -9,9 +9,9 @@
         ]]>
 	</insert>
 	
-	<select id="selectDescriptionRow" resultType="hashmap" parameterType="hashmap">
+	<select id="selectDescriptionRow" resultType="java.util.LinkedHashMap" parameterType="hashmap">
         <![CDATA[
-            select * from TEM_D_ADM.${table_name} where task_id = #{task_id}
+            select *  from TEM_D_ADM.${table_name} where task_id = #{task_id}
         ]]>
 	</select>
 

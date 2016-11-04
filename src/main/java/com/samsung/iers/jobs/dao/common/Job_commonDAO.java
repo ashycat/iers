@@ -1,5 +1,6 @@
 package com.samsung.iers.jobs.dao.common;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class Job_commonDAO extends AbstractDAO {
 		 insert ("job_common.insertJobtoTaskTable", map);
     
 	}
-	public List<Map<String, Object>> selectDescriptionRow (Map<String, Object> map) {
+	public List<LinkedHashMap<String, Object>> selectDescriptionRow (Map<String, Object> map) {
 		// task.selectAllTaskList -> mapper
 		
 		System.out.println("job_commonDAO " + map.get("table_name"));

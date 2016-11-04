@@ -14,6 +14,7 @@ public class JsonTemplate {
 	public ObjectMapper om = new ObjectMapper();
 
 	protected Log log = LogFactory.getLog(JsonTemplate.class);
+	
 	protected void printJSON(Object data) {
 		if(log.isDebugEnabled()){
 			log.debug("\t data  \t:  " + data);

@@ -67,7 +67,6 @@ console.log("app-init.js");
       'angular-ui-sortable' : '../bower_components/angular-ui-sortable/sortable.min',
       'angular-footable' : '../bower_components/angular-footable/dist/angular-footable.min',
       'ngRoute' : '../bower_components/angular-route/angular-route.min',
-      'checklist-model' : '../bower_components/checklist-model/checklist-model',
       'angular-sanitize' : '../bower_components/angular-sanitize/angular-sanitize.min',
       
       'angular-material' : '../bower_components/angular-material/angular-material.min',
@@ -115,7 +114,6 @@ console.log('requirePaths', requirePaths);
      'angular-ui-sortable' : ['angular'],
      'angular-footable' : ['angular'],
      'ngRoute' : ['angular'],
-     'checklist-model' : ['angular'],
      'angular-material' : ['angular', 'angular-animate', 'angular-aria'],
      'angular-aria' : ['angular']
   };

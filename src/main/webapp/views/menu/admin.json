@@ -41,6 +41,16 @@
      desc : '관리자',
      },
      {
+     name: 'Task Log',
+     url: '/admin/task/taskLog',
+     path: 'admin/task/taskLog',
+     visible:true,
+     deps: [
+            'controllers/admin/task/taskLogController'
+           ],
+     desc : '관리자',
+     },
+     {
      name: 'TaskInfo',
      url: '/admin/task/taskInfo',
      path: 'admin/task/taskInfo',
